@@ -47,25 +47,26 @@ void loop()
   digitalWrite(TRIGGER_PIN,LOW);
   //read echo
   sensor = pulseIn(ECHO_PIN,HIGH);
+  Serial.println(sensor);
   /*test lines that i used to find the threshold of the low values it would read
   if(sensor < 500){Serial.println(sensor);}   //to monitor sensor values
   */
   //if detects below a certain value (in this case 500), then go a little back and turn
-  if( sensor >=20 && sensor <= 500 ) 
+  if( sensor >=20 && sensor <= 750 ) 
   { //turns off GO indicator and turns on AVOID indicator
     digitalWrite(BLU_LED,LOW);
     digitalWrite(RED_LED,HIGH);
     //stops both servos
     servoLeft.write(STOP);
     servoRight.write(STOP);
-    delay(300);
+    delay(150);
     //sets both servos to full speed in opposite direction
     servoLeft.write(BWD);
     servoRight.write(FWD);
-    delay(300);
+    delay(150);
     //sets only the left servo to rotate so the robot turns right
     servoLeft.write(FWD);
-    delay(500);
+    delay(300);
     digitalWrite(RED_LED,LOW);
   }
 }
